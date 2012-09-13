@@ -1,0 +1,29 @@
+--- ../asuswrt.orig/release/src-rt/router/rc/jffs2.c	2012-05-22 23:40:51.000000000 +0400
++++ ../asuswrt/release/src-rt/router/rc/jffs2.c	2012-09-13 19:55:13.076919117 +0400
+@@ -74,7 +74,7 @@
+ 		}
+ 	}
+ 
+-	if ((statfs("/jffs", &sf) == 0) && (sf.f_type != 0x73717368 /* squashfs */)) {
++	if ((statfs("/jffs", &sf) == 0) && (sf.f_type != 0x71736873 /* squashfs */)) {
+ 		// already mounted
+ 		notice_set("jffs", format ? "Formatted" : "Loaded");
+ 		return;
+@@ -117,6 +117,8 @@
+ 	}
+ 	run_userfile("/jffs", ".asusrouter", "/jffs", 3);
+ 
++	if (!check_if_dir_exist("/jffs/scripts/")) mkdir("/jffs/scripts/", 0755);
++
+ }
+ 
+ void stop_jffs2(void)
+@@ -125,7 +127,7 @@
+ 
+ 	if (!wait_action_idle(10)) return;
+ 
+-	if ((statfs("/jffs", &sf) == 0) && (sf.f_type != 0x73717368)) {
++	if ((statfs("/jffs", &sf) == 0) && (sf.f_type != 0x71736873)) {
+ 		// is mounted
+ 		run_userfile("/jffs", ".autostop", "/jffs", 5);
+ 		run_nvscript("script_autostop", "/jffs", 5);
