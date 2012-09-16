@@ -60,4 +60,7 @@ system events:
  * __/jffs/scripts/wan-start__ - after WAN is up. 
 
 
+See __script-examples__ folder for (surprise!) script examples.
+
+
 That it. Feel free to use and to discuss asuswrt-ryzhov firmware here or at www.wl500g.info
