@@ -1,0 +1,9 @@
+#!/bin/sh
+
+logger -t $(basename $0) "started [$@]"
+
+# While you are using torrents, LinuxVM can't handle situation when download
+# speed is suddenly rises and becomes far more then USB thoughtput speed.
+# You will receive "Page allocation failure" error with default (too small!)
+# min_free_kbytes value.
+echo 8192 > /proc/sys/vm/min_free_kbytes

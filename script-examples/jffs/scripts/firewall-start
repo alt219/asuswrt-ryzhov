@@ -1,0 +1,17 @@
+#!/bin/sh
+
+logger -t $(basename $0) "started [$@]"
+
+# p2p exchange
+/usr/sbin/iptables -I INPUT -p tcp --dport 51413:51415 -j ACCEPT
+/usr/sbin/iptables -I INPUT -p udp --dport 51413:51415 -j ACCEPT
+
+# ssh wan access
+/usr/sbin/iptables -I INPUT -p tcp --dport 60022 -j ACCEPT
+
+# web server wan access
+#/usr/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+#/usr/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+
+# redirect a web-traffic from my Android tablet to privoxy with AdBlock filter
+/usr/sbin/iptables -t nat -A PREROUTING  --source 192.168.1.12 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 3128

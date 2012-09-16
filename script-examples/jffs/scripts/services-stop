@@ -1,0 +1,22 @@
+#!/bin/sh
+
+logger -t $(basename $0) "started [$@]"
+
+/opt/etc/init.d/rc.unslung stop
+
+# SAMBA is holding files often
+/usr/bin/killall smbd
+
+# trying to remount
+for i in `cat /proc/mounts | sort -r | awk '/ext/{print($1)}'`
+do
+    [ -n "`/opt/bin/lsof -t "$i"`" ] && /opt/bin/lsof -t "$i" | sort -nru | xargs kill -9
+    sleep 2s
+    /bin/mount -oremount,ro $i
+done
+
+# trying to unmount
+for i in `cat /proc/mounts | sort -r | awk '/ext/{print($1)}'`
+do
+    /bin/umount $i
+done

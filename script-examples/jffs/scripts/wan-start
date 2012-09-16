@@ -1,0 +1,5 @@
+#!/bin/sh
+
+logger -t $(basename $0) "started [$@]"
+
+/usr/sbin/ntpclient -h pool.ntp.org -s
