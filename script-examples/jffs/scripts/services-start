@@ -6,7 +6,7 @@ logger -t $(basename $0) "started [$@]"
 # You'll need it while using your own web-server on 80 port
 /usr/bin/killall httpd
 cd /www
-/usr/sbin/httpd -p 60080 &
+/usr/sbin/httpd -p 65080 &
 
 # /opt is a symlink to /tmp/opt in AsusWRT. If you are using Entware/Optware do
 ln -sf /tmp/mnt/ENTWARE /tmp/opt

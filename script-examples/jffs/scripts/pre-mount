@@ -1,0 +1,10 @@
+#!/bin/sh
+
+logger -t $(basename $0) "started [$@]"
+
+i2=`blkid | grep $@ | awk -F: '{print($1)}'`
+if [ -b $i2 ] ; then
+    grep -q $i2 /proc/mounts || e2fsck -p $i2 2>&1 | logger -t e2fsck
+else
+    logger -t fstab "$i as $i2 is not attached"
+fi

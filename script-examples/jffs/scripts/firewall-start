@@ -7,11 +7,11 @@ logger -t $(basename $0) "started [$@]"
 /usr/sbin/iptables -I INPUT -p udp --dport 51413:51415 -j ACCEPT
 
 # ssh wan access
-/usr/sbin/iptables -I INPUT -p tcp --dport 60022 -j ACCEPT
+/usr/sbin/iptables -I INPUT -p tcp --dport 65022 -j ACCEPT
 
 # web server wan access
 #/usr/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 #/usr/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
 
 # redirect a web-traffic from my Android tablet to privoxy with AdBlock filter
-/usr/sbin/iptables -t nat -A PREROUTING  --source 192.168.1.12 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 3128
+/usr/sbin/iptables -t nat -A PREROUTING  --source 10.9.68.5 -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 3128
