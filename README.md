@@ -54,9 +54,11 @@ and reboot a router __twice__ (one to formatting jffs partition, next - to mount
  2. A few predefined scripts, driven by some
 system events:
 
- * __/jffs/scripts/init-start__ - will be executed right after kernel fully booted.
+ * __/jffs/scripts/init-start__ - will be executed right after kernel boot.
+ * __/jffs/scripts/wan-start__ - after WAN connection is initiated. Good place to do some internet-depended tasks.
  * __/jffs/scripts/firewall-start__ - after firewall rules reapplied. Place custom iptables rules here.
- * __/jffs/scripts/pre-mount__ - executed before every partition been mounted. The script will receive one parameter - device name (i.e. /dev/sda1). A right place for partition consistency check.
+ * __/jffs/scripts/pre-mount__ - before every partition been mounted. The script will receive one parameter - device name (i.e. /dev/sda1). A right place for partition consistency check.
+ * __/jffs/scripts/post-mount__ - executed every time when USB partition is mounted. The script will receive one parameter - mount point name.
  * __/jffs/scripts/services-start__ - will be executed after system boots and all external USB drives are mounted. A right place for starting external services from Entware/Optware.
  * __/jffs/scripts/services-stop__ - executed at shutdown before external drives unmounts. Gives a chance to shutdown external services gracefully.
 
