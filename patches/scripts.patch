@@ -60,25 +60,6 @@
  #ifdef RTCONFIG_WEBDAV
  	stop_webdav();
  #endif
---- ../asuswrt/release/src/router/rc/usb.c.orig	2012-09-07 10:57:08.000000000 +0400
-+++ ../asuswrt/release/src/router/rc/usb.c	2012-09-13 23:31:11.796683062 +0400
-@@ -838,6 +838,8 @@
- 	if(!is_valid_hostname(the_label))
- 		memset(the_label, 0, 128);
- 
-+	run_custom_script_blocking("pre-mount", dev_name);
-+
- 	if (f_exists("/etc/fstab")) {
- 		if (strcmp(type, "swap") == 0) {
- 			_eval(swp_argv, NULL, 0, NULL);
-@@ -1064,6 +1066,7 @@
- 			start_cloudsync();
- 		}
- #endif
-+		run_custom_script_blocking("post-mount", mountpoint);
- 	}
- 	return (ret == MOUNT_VAL_RONLY || ret == MOUNT_VAL_RW);
- }
 --- ../asuswrt/release/src/router/rc/wan.c.orig	2012-09-07 10:57:08.000000000 +0400
 +++ ../asuswrt/release/src/router/rc/wan.c	2012-09-13 23:31:11.796683063 +0400
 @@ -745,6 +745,9 @@
@@ -102,3 +83,22 @@
  	state = SIGUSR2;	/* START */
  
  	for (;;) {
+--- ../asuswrt/release/src/router/rc/usb.c.orig	2012-09-07 10:57:08.000000000 +0400
++++ ../asuswrt/release/src/router/rc/usb.c	2012-09-19 15:06:54.234199711 +0400
+@@ -838,6 +838,8 @@
+ 	if(!is_valid_hostname(the_label))
+ 		memset(the_label, 0, 128);
+ 
++	run_custom_script_blocking("pre-mount", dev_name);
++
+ 	if (f_exists("/etc/fstab")) {
+ 		if (strcmp(type, "swap") == 0) {
+ 			_eval(swp_argv, NULL, 0, NULL);
+@@ -972,6 +974,7 @@
+ 
+ 		if (nvram_get_int("usb_automount"))
+ 			run_nvscript("script_usbmount", mountpoint, 3);
++		run_custom_script_blocking("post-mount", mountpoint);
+ 
+ #if defined(RTCONFIG_APP_PREINSTALLED) && defined(RTCONFIG_CLOUDSYNC)
+ 		char word[PATH_MAX], *next_word;
