@@ -1,5 +1,5 @@
---- ../asuswrt.orig/release/src-rt/router/rc/jffs2.c	2012-05-22 23:40:51.000000000 +0400
-+++ ../asuswrt/release/src-rt/router/rc/jffs2.c	2012-09-13 19:55:13.076919117 +0400
+--- ../asuswrt/release/src-rt/router/rc/jffs2.c.orig
++++ ../asuswrt/release/src-rt/router/rc/jffs2.c
 @@ -74,7 +74,7 @@
  		}
  	}
