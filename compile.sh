@@ -18,7 +18,7 @@ mkdir ../asuswrt/release/src/router/asuswebstorage/prebuilt
 cp -f ./missing_files/asuswebstorage ../asuswrt/release/src/router/asuswebstorage/prebuilt
 patch -p0 -i ./patches/lighttpd.patch
 cp -f ./missing_files/Makefile.am.gpl ../asuswrt/release/src/router/lighttpd-1.4.29/src/
-cp -f ./missing_files/mod_sharelink.so.l ../asuswrt/release/src/router/lighttpd-1.4.29/prebuild/
+cp -f ./missing_files/mod_*.so.l ../asuswrt/release/src/router/lighttpd-1.4.29/prebuild/
 
 
 echo Adding JFFS, SSH and custom scripts support...

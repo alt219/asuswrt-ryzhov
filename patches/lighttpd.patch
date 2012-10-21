@@ -20,10 +20,32 @@ diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/configure ../asuswr
  
  if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then :
    emulate sh
+diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/external_file/css/tabs.css ../asuswrt/release/src/router/lighttpd-1.4.29/external_file/css/tabs.css
+--- ../asuswrt.orig/release/src/router/lighttpd-1.4.29/external_file/css/tabs.css	2012-09-28 12:10:12.000000000 +0400
++++ ../asuswrt/release/src/router/lighttpd-1.4.29/external_file/css/tabs.css	2012-10-21 12:42:30.812109280 +0400
+@@ -6,7 +6,7 @@
+ .abgne_tab {
+ 	clear: left;
+ 	width: 780px;
+-	height: 520px;
++	height: 450px;
+ 	margin: 10px 0;
+ }
+ ul.tabs {
+diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/external_file/js/smbdav-main.min.js ../asuswrt/release/src/router/lighttpd-1.4.29/external_file/js/smbdav-main.min.js
+--- ../asuswrt.orig/release/src/router/lighttpd-1.4.29/external_file/js/smbdav-main.min.js	2012-10-16 14:25:13.000000000 +0400
++++ ../asuswrt/release/src/router/lighttpd-1.4.29/external_file/js/smbdav-main.min.js	2012-10-21 12:42:30.812109280 +0400
+@@ -86,5 +86,5 @@
+ $("#upload_panel").css("display","block");$("#upload_panel").css("left","1999px");$("#upload_panel").animate({left:"0px"},"slow");var a=addPathSlash(g_storage.get("openurl"));$("#upload_panel iframe").attr("src","/smb/css/upload.html?u="+a);$("#function_help").text(m.getString("msg_uploadmode_help"));adjustLayout()});$("#btnCancelUpload").click(closeUploadPanel);$("div#hostview").scroll(function(){g_storage.set("hostviewscrollTop",$(this).scrollTop())});$("div#fileview").scroll(function(){g_storage.set("contentscrollLeft",
+ $(this).scrollLeft());g_storage.set("contentscrollTop",$(this).scrollTop())});$(".navigation#lan dd a").click(function(){var a=$(this).attr("id");g_storage.set("lan",a);window.location.reload()});$(".navigation#setting dd a").click(function(){var a=$(this).attr("id");if(a=="logout")confirm(m.getString("msg_logout_confirm"))==!0&&doLOGOUT();else if(a=="favorite")addtoFavorite();else if(a=="config"){var a=g_storage.get("misc_http_enable"),b=g_storage.get("misc_http_port"),c=window.location.host;a==
+ 0&&!isPrivateIP()?alert(m.getString("msg_no_config")):(a=isPrivateIP()?"http://"+c.split(":")[0]:"http://"+c.split(":")[0]+":"+b,window.location=a)}else a=="help"?(a=getPageSize(),b=$("div#modalWindow"),g_modal_window_height=a[1]-30,g_modal_window_width=g_modal_window_height*1.28,g_modal_window_width>a[0]&&(g_modal_window_width=a[0],g_modal_window_height=g_modal_window_width*0.78125),g_modal_url="/smb/css/help.html?showbutton=1",$("#jqmMsg").css("display","none"),$("#jqmTitleText").text(m.getString("title_help")),
+-b&&b.jqmShow()):a=="rescan_samba"?doRescanSamba():a=="sharelink"?(b=$("div#modalWindow"),g_modal_url="/smb/css/setting.html?p=1",g_modal_window_width=800,g_modal_window_height=600,$("#jqmMsg").css("display","none"),$("#jqmTitleText").text(m.getString("title_setting")),b&&b.jqmShow()):a=="version"&&(b=$("div#modalWindow"),g_modal_url="/smb/css/setting.html?p=2",g_modal_window_width=800,g_modal_window_height=600,$("#jqmMsg").css("display","none"),$("#jqmTitleText").text(m.getString("title_setting")),
++b&&b.jqmShow()):a=="rescan_samba"?doRescanSamba():a=="sharelink"?(b=$("div#modalWindow"),g_modal_url="/smb/css/setting.html?p=1",g_modal_window_width=800,g_modal_window_height=530,$("#jqmMsg").css("display","none"),$("#jqmTitleText").text(m.getString("title_setting")),b&&b.jqmShow()):a=="version"&&(b=$("div#modalWindow"),g_modal_url="/smb/css/setting.html?p=2",g_modal_window_width=800,g_modal_window_height=530,$("#jqmMsg").css("display","none"),$("#jqmTitleText").text(m.getString("title_setting")),
+ b&&b.jqmShow())});$(".navigation#refresh dt a").click(function(){var a=g_storage.get("openurl");g_storage.set("HostList","");doPROPFIND("/",function(){a=a==void 0?"/":a;a!="/"&&doPROPFIND(a)},0)});$(".themes_ctrl").click(function(){var a=$(this).attr("id");g_storage.setl("skin",a);window.location.reload()});$("#btnPlayImage").click(function(){openImageViewer()});$(window).resize(adjustLayout)});
 diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.am ../asuswrt/release/src/router/lighttpd-1.4.29/src/Makefile.am
 --- ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.am	2012-10-17 14:35:01.000000000 +0400
-+++ ../asuswrt/release/src/router/lighttpd-1.4.29/src/Makefile.am	2012-10-20 22:51:27.661017597 +0400
-@@ -59,6 +59,13 @@
++++ ../asuswrt/release/src/router/lighttpd-1.4.29/src/Makefile.am	2012-10-21 12:42:30.812109280 +0400
+@@ -59,6 +59,14 @@
  parsers: configparser.c mod_ssi_exprparser.c
  endif
  
@@ -32,6 +54,7 @@ diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.am ../
 +	if test -d '../prebuild' ; then \
 +		cp ../prebuild/mod_smbdav.so .libs/mod_smbdav.so; \
 +		cp ../prebuild/mod_aidisk_access.so .libs/mod_aidisk_access.so; \
++		cp ../prebuild/mod_sharelink.so.l .libs/mod_sharelink.so; \
 +	fi
 +
  BUILT_SOURCES = parsers versionstamp 
@@ -39,7 +62,7 @@ diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.am ../
  CLEANFILES = versionstamp.h versionstamp.h.tmp
 diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.in ../asuswrt/release/src/router/lighttpd-1.4.29/src/Makefile.in
 --- ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.in	2012-10-12 00:47:45.000000000 +0400
-+++ ../asuswrt/release/src/router/lighttpd-1.4.29/src/Makefile.in	2012-10-20 22:51:27.661017597 +0400
++++ ../asuswrt/release/src/router/lighttpd-1.4.29/src/Makefile.in	2012-10-21 12:42:30.812109277 +0400
 @@ -1,9 +1,9 @@
 -# Makefile.in generated by automake 1.11.1 from Makefile.am.
 +# Makefile.in generated by automake 1.11.3 from Makefile.am.
@@ -1066,7 +1089,7 @@ diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.in ../
  mostlyclean-generic:
  
  clean-generic:
-@@ -2002,6 +1902,13 @@
+@@ -2002,6 +1902,14 @@
  
  @CROSS_COMPILING_FALSE@parsers: configparser.c mod_ssi_exprparser.c
  
@@ -1075,6 +1098,7 @@ diff -bur ../asuswrt.orig/release/src/router/lighttpd-1.4.29/src/Makefile.in ../
 +	if test -d '../prebuild' ; then \
 +		cp ../prebuild/mod_smbdav.so .libs/mod_smbdav.so; \
 +		cp ../prebuild/mod_aidisk_access.so .libs/mod_aidisk_access.so; \
++		cp ../prebuild/mod_sharelink.so.l .libs/mod_sharelink.so; \
 +	fi
 +
  # Tell versions [3.59,3.63) of GNU make to not export all variables.
