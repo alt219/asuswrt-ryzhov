@@ -1,3 +1,9 @@
+Please note: project is closed
+==================================
+I have found a way to implement start/stop script on a ASUS's stock firmware without any modifications. Moreover, it's fits to any modern ASUS router, so this project becomes quite useless.
+Please [visit](http://forums.smallnetbuilder.com/showthread.php?t=8715) SmallNetBuilder forum for details.
+
+
 asuswrt-ryzhov = ASUS firmware + JFFS + user scripts
 ==================================
 
